@@ -14,7 +14,7 @@ class AddForeignKeysToActivityTable extends Migration {
 	{
 		Schema::table('activity', function(Blueprint $table)
 		{
-			$table->foreign('Id_user', 'Activity_User_FK')->references('Id_user')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('Id_user', 'Activity_Users_FK')->references('Id_user')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddForeignKeysToActivityTable extends Migration {
 	{
 		Schema::table('activity', function(Blueprint $table)
 		{
-			$table->dropForeign('Activity_User_FK');
+			$table->dropForeign('Activity_Users_FK');
 		});
 	}
 

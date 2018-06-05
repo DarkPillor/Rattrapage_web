@@ -15,7 +15,7 @@ class CreateVoteTable extends Migration {
 		Schema::create('vote', function(Blueprint $table)
 		{
 			$table->integer('Id_activity');
-			$table->integer('Id_user')->index('Vote_User0_FK');
+			$table->integer('Id_user')->index('Vote_Users0_FK');
 			$table->boolean('vote');
 			$table->time('Time_vote');
 			$table->dateTime('Date_vote');

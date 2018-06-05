@@ -15,7 +15,7 @@ class AddForeignKeysToVoteTable extends Migration {
 		Schema::table('vote', function(Blueprint $table)
 		{
 			$table->foreign('Id_activity', 'Vote_Activity_FK')->references('Id_activity')->on('activity')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('Id_user', 'Vote_User0_FK')->references('Id_user')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('Id_user', 'Vote_Users0_FK')->references('Id_user')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -30,7 +30,7 @@ class AddForeignKeysToVoteTable extends Migration {
 		Schema::table('vote', function(Blueprint $table)
 		{
 			$table->dropForeign('Vote_Activity_FK');
-			$table->dropForeign('Vote_User0_FK');
+			$table->dropForeign('Vote_Users0_FK');
 		});
 	}
 

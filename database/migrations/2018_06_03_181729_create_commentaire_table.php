@@ -17,7 +17,7 @@ class CreateCommentaireTable extends Migration {
 			$table->integer('Id_com', true);
 			$table->string('Description_com', 300);
 			$table->date('Date_com');
-			$table->integer('Id_user')->index('Commentaire_User_FK');
+			$table->integer('Id_user')->index('Commentaire_Users_FK');
 			$table->integer('Id_photo')->index('Commentaire_Photo0_FK');
 		});
 	}

@@ -16,7 +16,7 @@ class CreatePhotoTable extends Migration {
 		{
 			$table->integer('Id_photo', true);
 			$table->string('url_photo', 200);
-			$table->integer('Id_user')->nullable()->index('Photo_User_FK');
+			$table->integer('Id_user')->nullable()->index('Photo_Users_FK');
 			$table->integer('Id_activity')->nullable()->index('Photo_Activity0_FK');
 		});
 	}

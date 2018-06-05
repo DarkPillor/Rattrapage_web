@@ -19,7 +19,7 @@ class CreateActivityTable extends Migration {
 			$table->string('Name_activity', 50);
 			$table->string('Description_activity', 300);
 			$table->boolean('Repeat_activity');
-			$table->integer('Id_user')->index('Activity_User_FK');
+			$table->integer('Id_user')->index('Activity_Users_FK');
 		});
 	}
 
