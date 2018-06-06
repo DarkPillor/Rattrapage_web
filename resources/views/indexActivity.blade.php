@@ -34,9 +34,11 @@
         <td>{{$activity['Date_activity']}}</td>
         <td>{{$activity['Time_activity']}}</td>
 
-        <td><a href="{{action('ActivityController@edit', $activity['Id_activity'])}}" class="btn btn-warning">Edit</a></td>
+
+
         <td>
-          <form action="{{action('ActivityController@destroy', $activity['Id_activity'])}}" method="post">
+        <td>
+          
             @csrf
             <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>
