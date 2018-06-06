@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Activity;
 
 class ActivityController extends Controller
 {
@@ -18,12 +19,12 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        $activity= new \App\Activity;
-        $activity->Name_Activity=$request->get('Name_Activity');
-        $activity->Description_activity=$request->get('Description_activity');
-        $activity->Repeat_activity=$request->get('Repeat_activity');
-        $activity->Date_activity=$request->get('Date_activity');
-        $activity->Time_activity=$request->get('Time_activity');
+        $activity= new Activity;
+        $activity->Name_Activity = $request->get('Name_Activity');
+        $activity->Description_activity = $request->get('Description_activity');
+        $activity->Repeat_activity = $request->get('Repeat_activity');
+        $activity->Date_activity = $request->get('Date_activity');
+        $activity->Time_activity = $request->get('Time_activity');
         $activity->save();
       //  $id = Auth::user()->id;
       //  $activity->Id
@@ -41,10 +42,10 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($Id_activity)
+    public function edit($id)
     {
-        $activity = \App\Activity::find($Id_activity);
-        return view('editActivity',compact('activity','Id_activity'));
+        $activity = Activity::find($id);
+        return view('editActivity',compact('activity'));
     }
     /**
      * Update the specified resource in storage.
@@ -53,9 +54,9 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $Id_activity)
+    public function update(Request $request, $id)
     {
-        $activity= \App\Activity::find($Id_activity);
+        $activity= Activity::find($id);
         $activity->Name_Activity=$request->get('Name_Activity');
         $activity->Description_activity=$request->get('Description_activity');
         $activity->Repeat_activity=$request->get('Repeat_activity');
@@ -70,9 +71,9 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($Id_activity)
+    public function destroy($id)
     {
-        $activity = \App\Activity::find($Id_activity);
+        $activity = Activity::find($id);
         $activity->delete();
         return redirect('activitys')->with('success','Information has been  deleted');
     }
