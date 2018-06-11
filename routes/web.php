@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('activitys','activityController');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
