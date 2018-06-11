@@ -20,11 +20,11 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         $activity= new Activity;
-        $activity->Name_Activity = $request->get('Name_Activity');
-        $activity->Description_activity = $request->get('Description_activity');
-        $activity->Repeat_activity = $request->get('Repeat_activity');
-        $activity->Date_activity = $request->get('Date_activity');
-        $activity->Time_activity = $request->get('Time_activity');
+        $activity->name = $request->get('name');
+        $activity->description = $request->get('description');
+        $activity->repeat = $request->get('repeat');
+        $activity->date = $request->get('date');
+        $activity->time = $request->get('time');
         $activity->save();
       //  $id = Auth::user()->id;
       //  $activity->Id
@@ -45,7 +45,7 @@ class ActivityController extends Controller
     public function edit($id)
     {
         $activity = Activity::find($id);
-        return view('editActivity',compact('activity'));
+        return view('editActivity',compact('activity', 'id'));
     }
     /**
      * Update the specified resource in storage.
@@ -57,11 +57,11 @@ class ActivityController extends Controller
     public function update(Request $request, $id)
     {
         $activity= Activity::find($id);
-        $activity->Name_Activity=$request->get('Name_Activity');
-        $activity->Description_activity=$request->get('Description_activity');
-        $activity->Repeat_activity=$request->get('Repeat_activity');
-        $activity->Date_activity=$request->get('Date_activity');
-        $activity->Time_activity=$request->get('Time_activity');
+        $activity->name=$request->get('name');
+        $activity->description=$request->get('description');
+        $activity->repeat=$request->get('repeat');
+        $activity->date=$request->get('date');
+        $activity->time=$request->get('time');
         $activity->save();
         return redirect('activitys');
     }

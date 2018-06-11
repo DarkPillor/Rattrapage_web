@@ -18,21 +18,21 @@
         <div class="row">
           <div class="col-md-6"></div>
           <div class="form-group col-md-4">
-            <label for="Name_activity">Name:</label>
-            <input type="text" class="form-control" name="Name_Activity">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6"></div>
             <div class="form-group col-md-4">
-              <label for="Email">Description:</label>
-              <textarea name="Description_activity" class="form-control" rows="5" cols="40"></textarea>
+              <label for="description">Description:</label>
+              <textarea name="description" class="form-control" rows="5" cols="40"></textarea>
           </div>
         <div class="row">
           <div class="col-md-6"></div>
             <div class="form-group col-md-4">
                 <lable>Est-ce que l'activité va se repeter ?</lable>
-                <select name="Repeat_activity">
+                <select name="repeat">
                   <option value="0">Non</option>
                   <option value="1">Oui</option>
                 </select>
@@ -42,7 +42,7 @@
          <div class="col-md-6"></div>
            <div class="form-group col-md-4">
                <lable>Quand voulez vous organiser cela ?</lable>
-               <input type="date" name="Date_activity">
+               <input type="date" name="date">
                </select>
            </div>
        </div>
@@ -50,7 +50,7 @@
         <div class="col-md-6"></div>
           <div class="form-group col-md-4">
               <lable>A partir de ?</lable>
-              <input type="time" name="Time_activity">
+              <input type="time" name="time">
               </select>
           </div>
       </div>

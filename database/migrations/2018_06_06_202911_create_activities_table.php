@@ -15,6 +15,7 @@ class CreateActivitiesTable extends Migration {
 			$table->text('description');
 			$table->tinyInteger('repeat');
 			$table->string('date');
+			$table->time('time');
 			$table->timestamps();
 		});
 	}

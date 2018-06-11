@@ -27,18 +27,17 @@
     <tbody>
       @foreach($activitys as $activity)
       <tr>
-        <td>{{$activity['Name_activity']}}</td>
-        <td>{{$activity['Description_activity']}}</td>
-        <td>{{$activity['Repeat_activity']}}</td>
-
-        <td>{{$activity['Date_activity']}}</td>
-        <td>{{$activity['Time_activity']}}</td>
-
+        <td>{{$activity['name']}}</td>
+        <td>{{$activity['description']}}</td>
+        <td>{{$activity['date']}}</td>
+        <td>{{$activity['time']}}</td>
+        <td>{{$activity['repeat']}}</td>
 
 
+
+        <td><a href="{{action('activityController@edit', $activity['id'])}}"class="btn btn-warning"> Edit</a></td>
         <td>
-        <td>
-          
+          <form action="{{action('activityController@destroy', $activity['id'])}}"class="btn btn-warning" method="post">
             @csrf
             <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>
