@@ -16,6 +16,7 @@ class CreateActivitiesTable extends Migration {
 			$table->tinyInteger('repeat');
 			$table->string('date');
 			$table->time('time');
+			$table->boolean('validate');
 			$table->timestamps();
 		});
 	}

@@ -18,7 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('activitys','activityController');
+
+Route::resource('Photos','PhotosController');
+Route::post('Photos/{id}', 'PhotosController@update');
 
 
 Auth::routes();

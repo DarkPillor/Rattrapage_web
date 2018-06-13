@@ -10,7 +10,9 @@ class CreatePhotosTable extends Migration {
 		Schema::create('photos', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
+			$table->integer('activities_id')->unsigned();
 			$table->string('photo', 200);
+			
 			$table->timestamps();
 		});
 	}

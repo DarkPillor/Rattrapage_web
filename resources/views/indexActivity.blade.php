@@ -36,9 +36,6 @@
         <td>{{$activity['date']}}</td>
         <td>{{$activity['time']}}</td>
         <td>{{$activity['repeat']}}</td>
-
-
-
         <td><a href="{{action('activityController@edit', $activity['id'])}}"class="btn btn-warning"> Edit</a></td>
         <td>
           <form action="{{action('activityController@destroy', $activity['id'])}}"class="btn btn-warning" method="post">
@@ -47,34 +44,13 @@
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>
         </td>
+        <!-- <td><a href="{{action('PhotosController@index', $activity['id'])}}"class="btn btn-warning"> C'est ici pour Upload</a></td> -->
         <td>
-          <div id="mulitplefileuploader">Upload</div>
-          <div id="status"></div>
-            <script>
-
-              $(document).ready(function()
-                {
-
-                  var settings = {
-                    url: "YOUR_MULTIPE_FILE_UPLOAD_URL",
-                    method: "POST",
-                    allowedTypes:"jpg,png,gif,doc,pdf,zip",
-                    fileName: "myfile",
-                    multiple: true,
-                    onSuccess:function(files,data,xhr)
-                    {
-                      $("#status").html("<font color='green'>Upload is success</font>");
-                     },
-                      onError: function(files,status,errMsg)
-                    {       
-                      $("#status").html("<font color='red'>Upload is Failed</font>");
-                    }
-                  }
-                  $("#mulitplefileuploader").uploadFile(settings);
-
-                });
-              </script>
-
+          <form action="{{action('PhotosController@update', $activity['id'])}}"class="btn btn-warning" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="photo" >
+              <button type="submit" class="btn btn-success">Submit</button>
+          </form>
         </td>
       </tr>
       @endforeach

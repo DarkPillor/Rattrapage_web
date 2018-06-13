@@ -54,6 +54,16 @@
               </select>
           </div>
       </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+          <div class="form-group col-md-4">
+              <lable>Voulez vous valider d'officer cet activité?</lable>
+              <select name="validate">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+              </select>
+          </div>
+      </div>
         <div class="row">
           <div class="col-md-6"></div>
           <div class="form-group col-md-4" style="margin-top:60px">

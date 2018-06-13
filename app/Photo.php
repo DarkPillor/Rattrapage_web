@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Photo extends Model 
+class Photo extends Model
 {
 
     protected $table = 'photos';
     public $timestamps = true;
-    protected $fillable = array('user_id', 'photo');
+    protected $fillable = array('user_id','activity_id', 'photo');
+    
 
     public function auteur()
     {
