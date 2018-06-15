@@ -25,6 +25,10 @@ Route::resource('Photos','PhotosController');
 Route::post('Photos/{id}', 'PhotosController@update');
 
 
+Route::post('Vote/{id}', 'VoteController@update');
+Route::delete('Vote/{id}','VoteController@destroy');
+Route::resource('Vote', 'VoteController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

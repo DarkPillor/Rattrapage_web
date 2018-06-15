@@ -1,25 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\Activity;
 use Auth;
+use Illuminate\Support\Facades\Storage;;
 
 class PhotosController extends Controller
 {
-  // public function index($id)
-  // {
-  //     $activity = Activity::find($id);
-  //     return view('indexPhoto',compact('activity', 'id'));
-  // }
-  /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  public function edit($id)
+  {
+      $activity = Activity::find($id);
+      return view('editActivity',compact('activity', 'id'));
+  }
   public function update(Request $request, $id)
   {
     $photo = new Photo;
@@ -27,7 +22,9 @@ class PhotosController extends Controller
             'photo' => 'required|file|max:1024',
         ]);
     $fileName = "photo".time().'.'.request()->photo->getClientOriginalExtension();
-    $request->photo->storeAs('logos',$fileName);
+    //$request->photo->storeAs('logos',$fileName);
+    //Storage::disk('local')->put($fileName, 'photo');
+    file_put_contents('/public/storage', $fileName);
     $activity_id= Activity::find($id);
     $id1 = Auth::user()->id;
     $photo->user_id = $id1;
@@ -36,5 +33,11 @@ class PhotosController extends Controller
     $photo->save();
 
       return redirect('activitys')->with('success', 'Information has been added');
+  }
+  public function show($id)
+  {
+    //$activity = Activity::find($id);select('photo')->
+    $photo = DB::table('photos')->where('activities_id','=', $id)->get();
+    return view('listPhoto',compact('photo', 'id' ));
   }
 }

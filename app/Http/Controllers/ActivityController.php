@@ -33,13 +33,14 @@ class ActivityController extends Controller
       //  $id = Auth::user()->id;
       //  $activity->Id
 
-        //return redirect('activities')->with('success', 'Information has been added');
+        return redirect('activitys')->with('success', 'Information has been added');
     }
     public function index()
     {
         $activitys=\App\Activity::all();
         return view('indexActivity',compact('activitys'));
     }
+    
     /**
      * Show the form for editing the specified resource.
      *
