@@ -22,9 +22,7 @@ class PhotosController extends Controller
             'photo' => 'required|file|max:1024',
         ]);
     $fileName = "photo".time().'.'.request()->photo->getClientOriginalExtension();
-    //$request->photo->storeAs('logos',$fileName);
-    //Storage::disk('local')->put($fileName, 'photo');
-    file_put_contents('/public/storage', $fileName);
+    $request->photo->storeAs('public/storage', $fileName);
     $activity_id= Activity::find($id);
     $id1 = Auth::user()->id;
     $photo->user_id = $id1;

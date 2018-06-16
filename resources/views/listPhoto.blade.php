@@ -18,23 +18,27 @@
       </div><br />
      @endif
     <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <!-- <th>L'heure</th>
-        <th>Est ce qu'il va se repeter ?</th> -->
-        <th colspan="2">Action</th>
-      </tr>
-    </thead>
+
     <tbody>
       @foreach ($photo as $photos)
+
       <?php $test =$photos->photo; ?>
-       <img src="{{asset("storage/$test")}}">
+       <img src="{{asset("storage/storage/$test")}}">
      @endforeach
-
-
+     <body id="body" style="overflow:hidden;">
+       <div id="abc">
+         <div id="popupContact">
+         <!-- Contact Us Form -->
+         <form action="{{action('activityController@destroy', $activity['id'])}}"class="btn btn-warning" method="post" id="form">
+           <img id="close" src="images/3.png" onclick ="div_hide()">
+           <h2>Contact Us</h2>
+           <hr>
+           <textarea id="msg" name="description" placeholder="Message"></textarea>
+           <button type="submit" class="btn btn-success">Submit</button>
+         </form>
+       </div>
+     </div>
+   </body>
     </tbody>
   </table>
   </div>

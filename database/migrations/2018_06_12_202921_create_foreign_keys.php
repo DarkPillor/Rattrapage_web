@@ -13,11 +13,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('no action')
 						->onUpdate('no action');
 		});
-		Schema::table('activities', function(Blueprint $table) {
-			$table->foreign('photo_id')->references('id')->on('photos')
-						->onDelete('no action')
-						->onUpdate('no action');
-		});
+		// Schema::table('activities', function(Blueprint $table) {
+		// 	$table->foreign('photo_id')->references('id')->on('photos')
+		// 				->onDelete('no action')
+		// 				->onUpdate('no action');
+		// });
 		Schema::table('vote', function(Blueprint $table) {
 			$table->foreign('user_id')->references('id')->on('users')
 						->onDelete('no action')
@@ -70,9 +70,9 @@ class CreateForeignKeys extends Migration {
 		Schema::table('activities', function(Blueprint $table) {
 			$table->dropForeign('activities_user_id_foreign');
 		});
-		Schema::table('activities', function(Blueprint $table) {
-			$table->dropForeign('activities_photo_id_foreign');
-		});
+		// Schema::table('activities', function(Blueprint $table) {
+		// 	$table->dropForeign('activities_photo_id_foreign');
+		// });
 		Schema::table('vote', function(Blueprint $table) {
 			$table->dropForeign('vote_user_id_foreign');
 		});
