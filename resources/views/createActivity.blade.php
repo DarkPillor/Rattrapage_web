@@ -5,12 +5,26 @@
     <title>Laravel 5.6 CRUD Tutorial With Example  </title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+            <div class="top-right links">
+                @auth
+                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('/activitys')}}">Voir les activités</a>
+                    <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+                @endauth
+            </div>
+        @endif
     <div class="container">
       <h2>Création d'une activité</h2><br/>
       <form method="post" action="{{url('activitys')}}" enctype="multipart/form-data">
@@ -78,5 +92,6 @@
             format: 'dd-mm-yyyy'
          });
     </script> -->
+  </div>
   </body>
 </html>

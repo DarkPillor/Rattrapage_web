@@ -40,7 +40,7 @@ class ActivityController extends Controller
         $activitys=\App\Activity::all();
         return view('indexActivity',compact('activitys'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *

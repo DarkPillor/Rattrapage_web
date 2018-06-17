@@ -5,11 +5,25 @@
     <title>Index Page</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
 
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+            <div class="top-right links">
+                @auth
+                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('/activitys')}}">Voir les activités</a>
+                    <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+                @endauth
+            </div>
+        @endif
     <div class="container">
     <br />
     @if (\Session::has('success'))
@@ -63,5 +77,6 @@
     </tbody>
   </table>
   </div>
+</div>
   </body>
 </html>

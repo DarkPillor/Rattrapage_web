@@ -10,7 +10,7 @@ class Photo extends Model
     protected $table = 'photos';
     public $timestamps = true;
     protected $fillable = array('user_id','activity_id', 'photo');
-    
+
 
     public function auteur()
     {
@@ -25,6 +25,10 @@ class Photo extends Model
     public function like()
     {
         return $this->hasMany('App\LikePhoto', 'photo_id');
+    }
+    public function commentaires()
+    {
+        return $this->hasMany('App\Commentaire', 'photo_id');
     }
 
 }

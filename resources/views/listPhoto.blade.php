@@ -5,11 +5,25 @@
     <title>Index Page</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/elements.css') }}">
+    <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
+    <script type="text/javascript" src="{!! asset('js/my_js.js') !!}"></script>
 
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/activitys')}}">Voir les activités</a>
+                <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Register</a>
+            @endauth
+        </div>
+    @endif
     <div class="container">
     <br />
     @if (\Session::has('success'))
@@ -21,26 +35,19 @@
 
     <tbody>
       @foreach ($photo as $photos)
+      <?php $test = $photos->photo;?>
+        <a href="{{action('CommentController@edit', $photos['id'])}}"class="btn btn-warning">
+        <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()"></a>
 
-      <?php $test =$photos->photo; ?>
-       <img src="{{asset("storage/storage/$test")}}">
      @endforeach
-     <body id="body" style="overflow:hidden;">
-       <div id="abc">
-         <div id="popupContact">
-         <!-- Contact Us Form -->
-         <form action="{{action('activityController@destroy', $activity['id'])}}"class="btn btn-warning" method="post" id="form">
-           <img id="close" src="images/3.png" onclick ="div_hide()">
-           <h2>Contact Us</h2>
-           <hr>
-           <textarea id="msg" name="description" placeholder="Message"></textarea>
-           <button type="submit" class="btn btn-success">Submit</button>
-         </form>
-       </div>
-     </div>
-   </body>
+
+
+
+    </body>
+
     </tbody>
   </table>
   </div>
+</div>
   </body>
 </html>

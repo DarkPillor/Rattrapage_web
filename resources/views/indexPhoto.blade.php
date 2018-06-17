@@ -6,6 +6,19 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+    <div class="top-right links">
+        @auth
+            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/activitys')}}">Voir les activités</a>
+            <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+        @else
+            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('register') }}">Register</a>
+        @endauth
+
+@endif
     <div class="container">
       <h2>Edit A Form</h2><br  />
         <form method="POST" action="{{action('PhotoController@store', $id)}}">
@@ -25,5 +38,7 @@
             format: 'dd-mm-yyyy'
          });
     </script> -->
+  </div>
+</div>
   </body>
 </html>

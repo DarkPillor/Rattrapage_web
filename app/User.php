@@ -44,7 +44,7 @@ public function commentaires()
 
 public function photos()
 {
-    return $this->hasMany('Photo', 'user_id');
+    return $this->hasMany('App\Photo', 'user_id');
 }
 
 public function aLike()

@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\Storage;;
 
 class PhotosController extends Controller
 {
-  public function edit($id)
-  {
-      $activity = Activity::find($id);
-      return view('editActivity',compact('activity', 'id'));
-  }
+
   public function update(Request $request, $id)
   {
     $photo = new Photo;
@@ -34,8 +30,8 @@ class PhotosController extends Controller
   }
   public function show($id)
   {
-    //$activity = Activity::find($id);select('photo')->
-    $photo = DB::table('photos')->where('activities_id','=', $id)->get();
-    return view('listPhoto',compact('photo', 'id' ));
+    $activity = Activity::find($id);
+    $photo = Photo::where('activities_id', $id)->get();
+    return view('listPhoto',compact('photo', 'activity' ));
   }
 }

@@ -10,6 +10,7 @@ class CreateCommentairesTable extends Migration {
 		Schema::create('commentaires', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
+			$table->integer('photo_id')->unsigned();
 			$table->text('description');
 			$table->timestamps();
 		});
