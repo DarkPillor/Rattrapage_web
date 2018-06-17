@@ -18,12 +18,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('activitys','activityController');
 
+Route::resource('Photos','PhotosController');
+Route::post('Photos/{id}', 'PhotosController@update');
+
+
+Route::post('Vote/{id}', 'VoteController@update');
+Route::delete('Vote/{id}','VoteController@destroy');
+Route::resource('Vote', 'VoteController');
+
+Route::post('Comment/{id}','CommentController@update');
+// Route::get('Comment/{Comment}/edit', 'CommentController@edit');
+Route::resource('Comment', 'CommentController');
+
+Route::resource('LikePhoto', 'LikephotosController');
+Route::post('LikePhoto/{id}', 'LikephotosController@update');
+Route::delete('LikePhoto/{id}', 'LikephotosController@destroy');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

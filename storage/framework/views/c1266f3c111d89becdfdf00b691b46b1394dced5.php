@@ -4,8 +4,22 @@
     <meta charset="utf-8">
     <title>Laravel 5.6 CRUD Tutorial With Example </title>
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/mon_css.css')); ?>">
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+        <?php if(Route::has('login')): ?>
+            <div class="top-right links">
+                <?php if(auth()->guard()->check()): ?>
+                    <a href="<?php echo e(url('/home')); ?>">Home</a>
+                    <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+                    <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
+                <?php else: ?>
+                    <a href="<?php echo e(route('login')); ?>">Login</a>
+                    <a href="<?php echo e(route('register')); ?>">Register</a>
+                <?php endif; ?>
+              </div>
+                    <?php endif; ?>
     <div class="container">
       <h2>Edit A Form</h2><br  />
         <form method="POST" action="<?php echo e(action('activityController@update', $id)); ?>">
@@ -58,11 +72,6 @@
         </div>
       </form>
     </div>
-    <!-- <script type="text/javascript">
-        $('#datepicker').datepicker({
-            autoclose: true,
-            format: 'dd-mm-yyyy'
-         });
-    </script> -->
+</div>
   </body>
 </html>

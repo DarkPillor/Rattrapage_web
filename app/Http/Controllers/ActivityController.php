@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Activity;
+use Auth;
 
 class ActivityController extends Controller
 {
@@ -20,7 +21,10 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         $activity= new Activity;
+        $id = Auth::user()->id;
+        $activity->user_id = $id;
         $activity->name = $request->get('name');
+        $activity->validate = $request->get('validate');
         $activity->description = $request->get('description');
         $activity->repeat = $request->get('repeat');
         $activity->date = $request->get('date');
@@ -29,13 +33,14 @@ class ActivityController extends Controller
       //  $id = Auth::user()->id;
       //  $activity->Id
 
-        //return redirect('activities')->with('success', 'Information has been added');
+        return redirect('activitys')->with('success', 'Information has been added');
     }
     public function index()
     {
         $activitys=\App\Activity::all();
         return view('indexActivity',compact('activitys'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *

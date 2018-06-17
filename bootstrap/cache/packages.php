@@ -20,12 +20,4 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'xethron/migrations-generator' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Way\\Generators\\GeneratorsServiceProvider',
-      1 => 'Xethron\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
-    ),
-  ),
 );

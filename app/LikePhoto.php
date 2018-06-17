@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LikePhoto extends Model 
+class LikePhoto extends Model
 {
 
     protected $table = 'likePhotos';

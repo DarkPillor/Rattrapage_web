@@ -4,8 +4,22 @@
     <meta charset="utf-8">
     <title>Laravel 5.6 CRUD Tutorial With Example </title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
   </head>
   <body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+            <div class="top-right links">
+                @auth
+                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('/activitys')}}">Voir les activités</a>
+                    <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+                @endauth
+              </div>
+                    @endif
     <div class="container">
       <h2>Edit A Form</h2><br  />
         <form method="POST" action="{{action('activityController@update', $id)}}">
@@ -58,11 +72,6 @@
         </div>
       </form>
     </div>
-    <!-- <script type="text/javascript">
-        $('#datepicker').datepicker({
-            autoclose: true,
-            format: 'dd-mm-yyyy'
-         });
-    </script> -->
+</div>
   </body>
 </html>

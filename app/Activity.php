@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-  protected $fillable = ['user_id', 'photo_id', 'name', 'description', 'repeat', 'date', 'time'];
+  protected $fillable = ['user_id', 'photo_id', 'name', 'description', 'repeat', 'date', 'time', 'validate'];
 
   public function votes()
   {

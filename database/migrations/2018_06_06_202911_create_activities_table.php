@@ -10,12 +10,13 @@ class CreateActivitiesTable extends Migration {
 		Schema::create('activities', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->integer('photo_id')->unsigned();
+		
 			$table->string('name');
 			$table->text('description');
 			$table->tinyInteger('repeat');
 			$table->string('date');
 			$table->time('time');
+			$table->boolean('validate');
 			$table->timestamps();
 		});
 	}
