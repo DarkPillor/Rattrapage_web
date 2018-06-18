@@ -13,6 +13,7 @@
                 @auth
                     <a href="{{ url('/home') }}">Home</a>
                     <a href="{{ url('/activitys')}}">Voir les activités</a>
+                    <a href="{{ url('/idee') }}">Voir les idées</a>
                     <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>

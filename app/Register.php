@@ -8,7 +8,7 @@ class Register extends Model
 {
   protected $table = 'registers';
   public $timestamps = true;
-  protected $fillable = array('user_id', 'activities_id');
+  protected $fillable = array('user_id', 'activities_id', 'payed');
 
   public function activity()
   {

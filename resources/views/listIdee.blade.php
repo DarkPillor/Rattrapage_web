@@ -60,26 +60,13 @@
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>
         </td>
-        <td><a href="{{action('RegisterController@edit', $activity['id'])}}"class="btn btn-warning"> S'inscrire</a></td>
-
-          <td>
-            <form action="{{action('RegisterController@destroy', $activity['id'])}}"class="btn btn-warning" method="post">
-              @csrf
-              <input name="_method" type="hidden" value="DELETE">
-              <button class="btn btn-danger" type="submit">Se désinscrire !</button>
-            </form>
-          </td>
-        <td><a href="{{action('RegisterController@show', $activity['id'])}}"class="btn btn-warning"> Regarder la liste des inscrits</a></td>
-
-
+        <td><a href="{{action('VoteController@edit', $activity['id'])}}"class="btn btn-warning">A voter !</a></td>
+        <form action="{{action('VoteController@destroy', $activity['id'])}}"class="btn btn-warning" method="post" >
+          @csrf
+            <input name="_method" type="hidden" value="DELETE">
+            <button class="btn btn-success" type="submit" >Dévoter</button>
         </form>
-        <td>
-          <form action="{{action('PhotosController@update', $activity['id'])}}"class="btn btn-warning" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="photo" >
-            <button type="submit" class="btn btn-success">Submit</button>
-          </form>
-        </td>
+
       </tr>
       @endforeach
     </tbody>

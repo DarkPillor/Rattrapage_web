@@ -37,7 +37,7 @@ class ActivityController extends Controller
     }
     public function index()
     {
-        $activitys=\App\Activity::all();
+        $activitys=\App\Activity::where('validate','=','1')->get();
         return view('indexActivity',compact('activitys'));
     }
 

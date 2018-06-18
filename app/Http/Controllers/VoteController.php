@@ -28,7 +28,7 @@ class VoteController extends Controller
   public function destroy($id)
   {
     $id1 = Auth::user()->id;
-    $vote = Vote::where('activities_id', $id)->where('user_id', $id1)->delete();
+    Vote::where('activities_id', $id)->where('user_id', $id1)->delete();
     return redirect('activitys')->with('success','Information has been  deleted');
   }
 

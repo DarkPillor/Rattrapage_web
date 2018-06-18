@@ -17,6 +17,7 @@
                 <?php if(auth()->guard()->check()): ?>
                     <a href="<?php echo e(url('/home')); ?>">Home</a>
                     <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+                    <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
                     <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
                 <?php else: ?>
                     <a href="<?php echo e(route('login')); ?>">Login</a>
@@ -59,11 +60,18 @@
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>
         </td>
-        <td><a href="<?php echo e(action('VoteController@edit', $activity['id'])); ?>"class="btn btn-warning">A voter !</a></td>
-        <form action="<?php echo e(action('VoteController@destroy', $activity['id'])); ?>"class="btn btn-warning" method="post" >
-          <?php echo csrf_field(); ?>
-            <input name="_method" type="hidden" value="DELETE">
-            <button type="submit" class="btn btn-success">Dévoter</button>
+        <td><a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="btn btn-warning"> S'inscrire</a></td>
+
+          <td>
+            <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>"class="btn btn-warning" method="post">
+              <?php echo csrf_field(); ?>
+              <input name="_method" type="hidden" value="DELETE">
+              <button class="btn btn-danger" type="submit">Se désinscrire !</button>
+            </form>
+          </td>
+        <td><a href="<?php echo e(action('RegisterController@show', $activity['id'])); ?>"class="btn btn-warning"> Regarder la liste des inscrits</a></td>
+
+
         </form>
         <td>
           <form action="<?php echo e(action('PhotosController@update', $activity['id'])); ?>"class="btn btn-warning" method="post" enctype="multipart/form-data">
