@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+Use DB;
 use App\Activity;
 use Auth;
 
@@ -24,21 +25,24 @@ class ActivityController extends Controller
         $id = Auth::user()->id;
         $activity->user_id = $id;
         $activity->name = $request->get('name');
-        $activity->validate = $request->get('validate');
         $activity->description = $request->get('description');
+        $activity->cost = $request->get('cost');
         $activity->repeat = $request->get('repeat');
         $activity->date = $request->get('date');
         $activity->time = $request->get('time');
         $activity->save();
-      //  $id = Auth::user()->id;
-      //  $activity->Id
+
 
         return redirect('activitys')->with('success', 'Information has been added');
     }
     public function index()
     {
-        $activitys=\App\Activity::where('validate','=','1')->get();
-        return view('indexActivity',compact('activitys'));
+        $activitys=\App\Activity::where('validate','=','1')->orderBy('id', 'desc')->get();
+        $today = date("Y-m-d");
+
+        
+        $type_id = Auth::user()->type;
+        return view('indexActivity',compact('activitys', 'today', 'type_id'));
     }
 
     /**
@@ -64,6 +68,7 @@ class ActivityController extends Controller
         $activity= Activity::find($id);
         $activity->name=$request->get('name');
         $activity->description=$request->get('description');
+        $activity->validate = $request->get('validate');
         $activity->repeat=$request->get('repeat');
         $activity->date=$request->get('date');
         $activity->time=$request->get('time');

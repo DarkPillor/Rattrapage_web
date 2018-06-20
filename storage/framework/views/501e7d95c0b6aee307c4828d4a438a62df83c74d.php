@@ -15,20 +15,28 @@
     <div class="flex-center position-ref full-height">
         <?php if(Route::has('login')): ?>
             <div class="top-right links">
-                <?php if(auth()->guard()->check()): ?>
-                    <a href="<?php echo e(url('/home')); ?>">Home</a>
-                    <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
-                    <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
-                <?php else: ?>
-                    <a href="<?php echo e(route('login')); ?>">Login</a>
-                    <a href="<?php echo e(route('register')); ?>">Register</a>
-                <?php endif; ?>
+              <?php if(auth()->guard()->check()): ?>
+                  <a href="<?php echo e(url('/home')); ?>">Home</a>
+                  <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+                  <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
+                  <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
+              <?php else: ?>
+                  <a href="<?php echo e(route('login')); ?>">Login</a>
+                  <a href="<?php echo e(route('register')); ?>">Register</a>
+              <?php endif; ?>
             </div>
         <?php endif; ?>
     <div class="container">
       <h2>Création d'une activité</h2><br/>
       <form method="post" action="<?php echo e(url('activitys')); ?>" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="form-group col-md-4">
+            <label for="name">Combien l'activité va couter:</label>
+            <input type="number" step="0.01" min="0" max="9999" class="form-control" name="cost">
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6"></div>
           <div class="form-group col-md-4">
@@ -60,23 +68,10 @@
                </select>
            </div>
        </div>
-       <div class="row">
-        <div class="col-md-6"></div>
-          <div class="form-group col-md-4">
-              <lable>A partir de ?</lable>
-              <input type="time" name="time">
-              </select>
-          </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6"></div>
-          <div class="form-group col-md-4">
-              <lable>Voulez vous valider d'officer cet activité?</lable>
-              <select name="validate">
-                <option value="0">Non</option>
-                <option value="1">Oui</option>
-              </select>
-          </div>
+
+
+      
+
       </div>
         <div class="row">
           <div class="col-md-6"></div>

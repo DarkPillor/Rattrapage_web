@@ -10,14 +10,15 @@
     <div class="flex-center position-ref full-height">
         <?php if(Route::has('login')): ?>
             <div class="top-right links">
-                <?php if(auth()->guard()->check()): ?>
-                    <a href="<?php echo e(url('/home')); ?>">Home</a>
-                    <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
-                    <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
-                <?php else: ?>
-                    <a href="<?php echo e(route('login')); ?>">Login</a>
-                    <a href="<?php echo e(route('register')); ?>">Register</a>
-                <?php endif; ?>
+              <?php if(auth()->guard()->check()): ?>
+                  <a href="<?php echo e(url('/home')); ?>">Home</a>
+                  <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+                  <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
+                  <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
+              <?php else: ?>
+                  <a href="<?php echo e(route('login')); ?>">Login</a>
+                  <a href="<?php echo e(route('register')); ?>">Register</a>
+              <?php endif; ?>
               </div>
                     <?php endif; ?>
     <div class="container">
@@ -62,6 +63,16 @@
               <lable>A partir de ?</lable>
               <input type="time" name="time" value="<?php echo e($activity->time); ?>">
               </select>
+          </div>
+          <div class="row">
+            <div class="col-md-6"></div>
+              <div class="form-group col-md-4">
+                  <lable>Voulez vous valider cet activité?</lable>
+                  <select name="validate">
+                    <option value="0">Non</option>
+                    <option value="1">Oui</option>
+                  </select>
+              </div>
           </div>
       </div>
         <div class="row">
