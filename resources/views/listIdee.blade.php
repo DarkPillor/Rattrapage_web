@@ -26,6 +26,7 @@
             </div>
         @endif
     <div class="container">
+
     <br />
     @if (\Session::has('success'))
       <div class="alert alert-success">
@@ -39,24 +40,21 @@
         <th>Nom de l'activité</th>
         <th>Description de l'activité</th>
         <th>Date :</th>
-        <th>Heure :</th>
         <th>Prix :</th>
         <!-- <th>L'heure</th>
         <th>Est ce qu'il va se repeter ?</th> -->
-
         <th colspan="2">Action</th>
       </tr>
     </thead>
-      <tbody>
+    <tbody>
+
       @foreach($activitys as $activity)
       <tr>
-        <td><a href="{{action('PhotosController@show', $activity['id'])}}">{{$activity['name']}}</a></td>
+        <td>{{$activity['name']}}</td>
         <td>{{$activity['description']}}</td>
         <td>{{$activity['date']}}</td>
-        <td>{{$activity['time']}}</td>
         <td>{{$activity['cost']}} €</td>
-        <!-- <td>{{$activity['time']}}</td> -->
-        <!-- <td>{{$activity['repeat']}}</td> -->
+
 
         @if($type_id == 1)
         <td><a href="{{action('activityController@edit', $activity['id'])}}"class="btn btn-warning"> Edit</a></td>
@@ -67,29 +65,20 @@
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>
         </td>
-        <td><a href="{{action('RegisterController@show', $activity['id'])}}"class="btn btn-warning"> Regarder la liste des inscrits</a></td>
         @endif
-          @if ($activity['date'] < $today)
-        <td><a href="{{action('RegisterController@edit', $activity['id'])}}"class="btn btn-warning"> S'inscrire</a></td>
 
-          <td>
-            <form action="{{action('RegisterController@destroy', $activity['id'])}}"class="btn btn-warning" method="post">
+        <td><a href="{{action('VoteController@edit', $activity['id'])}}"class="btn btn-warning">A voter !</a></td>
+
+        <td>
+            <form action="{{action('VoteController@destroy', $activity['id'])}}"class="btn btn-warning" method="post" >
               @csrf
               <input name="_method" type="hidden" value="DELETE">
-              <button class="btn btn-danger" type="submit">Se désinscrire !</button>
+              <button class="btn btn-success" type="submit" >Dévoter</button>
             </form>
-          </td>
-          @endif
-        @if ($activity['date'] > $today)
-        <form action="{{action('PhotosController@update', $activity['id'])}}"class="btn btn-warning" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="photo" >
-                        <button type="submit" class="btn btn-success">Submit</button>
-                      </form>
-                      @endif
-                    </td>
+        </td>
+        
       </tr>
-      @endforeach
+    @endforeach
     </tbody>
   </table>
   </div>

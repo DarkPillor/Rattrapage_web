@@ -11,22 +11,27 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                    <a href="{{ url('/activitys')}}">Voir les activités</a>
-                    <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                @endauth
+              @auth
+                  <a href="{{ url('/home') }}">Home</a>
+                  <a href="{{ url('/activitys')}}">Voir les activités</a>
+                  <a href="{{ url('/idee') }}">Voir les idées</a>
+                  <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+              @else
+                  <a href="{{ route('login') }}">Login</a>
+                  <a href="{{ route('register') }}">Register</a>
+              @endauth
             </div>
         @endif
         <div class="container">
           <h2>Edit A Form</h2><br  />
           @foreach($photos as $photo)
           <?php $test = $photo->photo; ?>
-          <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()">
+          <img src="{{asset("storage/storage/$test")}}" id="popup" alt ="<?php echo "$test"; ?>" >
           @endforeach
+
+          <td>Il a été liké {{$counts}}</td>
+
+
           <form action="{{action('LikephotosController@update', $id)}}"class="btn btn-warning" method="POST">
             @csrf
             <button class="btn btn-danger" type="submit">Like</button>
@@ -58,15 +63,18 @@
             </div>
           </form>
         @foreach($comments as $comment)
-        <tr>
-            <td>{{$comment['user_id']}}</td>
-            <td>{{$comment['description']}}</td>
-            <td>{{$comment['created_at']}}</td><br  />
-          </form>
-
-        </tr>
+        <?php $name = $comment->name;
+              $firstname = $comment->firstname;
+              $description = $comment->description;
+              $created = $comment->created_at;
+                echo "  <tr>
+                      <td>$name</td>
+                      <td>$firstname</td>
+                      <td>$description</td>
+                      <td>$created</td><br  />
+                    </form>
+                  </tr>";?>
         @endforeach
-
     </div>
 
     </body>

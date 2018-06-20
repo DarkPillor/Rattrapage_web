@@ -10,18 +10,31 @@ class LikephotosController extends Controller
 {
   public function update($id)
   {
-    $like = new LikePhoto;
     $id1 = Auth::user()->id;
-    $like->user_id = $id1;
-    $like->photo_id = $id;
-    $like->isLike = '1';
-    $like->save();
+    $test = LikePhoto::where('photo_id', $id)->where('user_id', $id1)->get();
+    foreach($test as $marcheputain){
+        If($marcheputain['user_id'] == $id1){
+          $test = false;
+        } else{
+          $test = true;
+          };
+      };
+      if($test == true){
+        $like = new LikePhoto;
+        $like->user_id = $id1;
+        $like->photo_id = $id;
+        $like->save();
+        return redirect()->back()->with('success','OUI');
+      } else{
+        return redirect()->back()->with('success','C FO CONNARD');
+      }
+
     return redirect('activitys')->with('success', 'Information has been added');
   }
   public function show($id)
 {
   $id1 = Auth::user()->id;
-  $like = LikePhoto::where('photo_id', $id)->where('user_id', $id1)->delete();
+  LikePhoto::where('photo_id', $id)->where('user_id', $id1)->delete();
   return redirect('activitys')->with('success','Information has been  deleted');
 }
 

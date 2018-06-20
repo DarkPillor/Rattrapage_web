@@ -14,14 +14,15 @@
     <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-                <a href="{{ url('/activitys')}}">Voir les activités</a>
-                <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
-            @endauth
+          @auth
+              <a href="{{ url('/home') }}">Home</a>
+              <a href="{{ url('/activitys')}}">Voir les activités</a>
+              <a href="{{ url('/idee') }}">Voir les idées</a>
+              <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+          @else
+              <a href="{{ route('login') }}">Login</a>
+              <a href="{{ route('register') }}">Register</a>
+          @endauth
         </div>
     @endif
     <div class="container">
@@ -37,7 +38,7 @@
       @foreach ($photo as $photos)
       <?php $test = $photos->photo;?>
         <a href="{{action('CommentController@edit', $photos['id'])}}"class="btn btn-warning">
-        <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()"></a>
+        <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()" alt ="<?php echo "$test"; ?>"></a>
 
      @endforeach
 

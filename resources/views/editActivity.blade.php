@@ -10,14 +10,15 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                    <a href="{{ url('/activitys')}}">Voir les activités</a>
-                    <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                @endauth
+              @auth
+                  <a href="{{ url('/home') }}">Home</a>
+                  <a href="{{ url('/activitys')}}">Voir les activités</a>
+                  <a href="{{ url('/idee') }}">Voir les idées</a>
+                  <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+              @else
+                  <a href="{{ route('login') }}">Login</a>
+                  <a href="{{ route('register') }}">Register</a>
+              @endauth
               </div>
                     @endif
     <div class="container">
@@ -62,6 +63,16 @@
               <lable>A partir de ?</lable>
               <input type="time" name="time" value="{{$activity->time}}">
               </select>
+          </div>
+          <div class="row">
+            <div class="col-md-6"></div>
+              <div class="form-group col-md-4">
+                  <lable>Voulez vous valider cet activité?</lable>
+                  <select name="validate">
+                    <option value="0">Non</option>
+                    <option value="1">Oui</option>
+                  </select>
+              </div>
           </div>
       </div>
         <div class="row">

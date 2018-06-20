@@ -23,7 +23,7 @@
     @endif
     <div class="container">
       <h2>Edit A Form</h2><br  />
-        <form method="POST" action="{{action('VoteController@update', $id)}}">
+        <form method="POST" action="{{action('RegisterController@update', $id)}}">
         @csrf
         <input name="_method" type="hidden" value="PATCH">
         </div>
@@ -31,8 +31,12 @@
        <div class="row">
         <div class="col-md-6"></div>
           <div class="form-group col-md-4">
-              <lable>A partir de ?</lable>
-              <input type="time" name="time" value="{{$activity->time}}">
+              <lable>Voulez vous payer maintenant ou sur place ?</lable>
+              <select name="payed">
+                  <option value="Non">Je payerais sur place</option>
+                  <option value="Oui">Je sort ma carte bancaire !</option>
+
+                </select>
               </select>
           </div>
       </div>

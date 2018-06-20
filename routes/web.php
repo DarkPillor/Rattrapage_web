@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('activitys','activityController');
+Route::resource('idee', 'ideeController');
 
 Route::resource('Photos','PhotosController');
 Route::post('Photos/{id}', 'PhotosController@update');
@@ -36,6 +37,10 @@ Route::resource('Comment', 'CommentController');
 Route::resource('LikePhoto', 'LikephotosController');
 Route::post('LikePhoto/{id}', 'LikephotosController@update');
 Route::delete('LikePhoto/{id}', 'LikephotosController@destroy');
+
+Route::post('Register/{id}', 'RegisterController@update');
+Route::Delete('Register/{id}', 'RegisterController@destroy');
+Route::resource('Register', 'RegisterController');
 
 
 Auth::routes();
