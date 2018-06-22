@@ -346,7 +346,9 @@ abstract class Relation
      */
     public static function getMorphedModel($alias)
     {
-        return self::$morphMap[$alias] ?? null;
+        return array_key_exists($alias, self::$morphMap)
+                        ? self::$morphMap[$alias]
+                        : null;
     }
 
     /**
