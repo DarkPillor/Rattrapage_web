@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Laravel 5.6 CRUD Tutorial With Example </title>
+    <title>Les photos </title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
   </head>
   <body>
@@ -14,14 +14,18 @@
           <a href="{{ url('/activitys')}}">Voir les activités</a>
           <a href="{{ url('/idee') }}">Voir les idées</a>
           <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+          <a href="{{ route('logout') }}"> Déconnexion</a>
       @else
           <a href="{{ route('login') }}">Login</a>
           <a href="{{ route('register') }}">Register</a>
       @endauth
-
+    </div>
 @endif
+<br />
+<H1> La liste des images lié à cet activité :</h1>
+  <br />
     <div class="container">
-      <h2>Edit A Form</h2><br  />
+
         <form method="POST" action="{{action('PhotoController@store', $id)}}">
         @csrf
         <input type="file" name="photo" >
@@ -33,13 +37,6 @@
         </div>
       </form>
     </div>
-    <!-- <script type="text/javascript">
-        $('#datepicker').datepicker({
-            autoclose: true,
-            format: 'dd-mm-yyyy'
-         });
-    </script> -->
   </div>
-</div>
-  </body>
+</body>
 </html>

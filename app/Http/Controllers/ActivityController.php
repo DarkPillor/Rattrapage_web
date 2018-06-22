@@ -11,7 +11,8 @@ class ActivityController extends Controller
 {
   public function create()
   {
-      return view('createActivity');
+    $type_id = Auth::user()->type;
+      return view('createActivity', compact('type_id'));
   }
   /**
      * Store a newly created resource in storage.
@@ -21,6 +22,7 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+      //Fonction qui va stocké l'activitée
         $activity= new Activity;
         $id = Auth::user()->id;
         $activity->user_id = $id;
@@ -37,10 +39,11 @@ class ActivityController extends Controller
     }
     public function index()
     {
+        // Cette fonction va afficher les activitées qui seront valide
         $activitys=\App\Activity::where('validate','=','1')->orderBy('id', 'desc')->get();
+        // On va calculer le jour actuel
         $today = date("Y-m-d");
-
-        
+        // On détermine le type d'utilisateur
         $type_id = Auth::user()->type;
         return view('indexActivity',compact('activitys', 'today', 'type_id'));
     }
@@ -53,8 +56,20 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        $activity = Activity::find($id);
-        return view('editActivity',compact('activity', 'id'));
+        // On détermine le type d'utilisateur
+        $type_id = Auth::user()->type;
+        // Ici on souhaite savoir si c'est un administrateur qui va executer la commande
+        if($type_id == 1){
+          $activity = Activity::find($id);
+          return view('editActivity',compact('activity', 'id', 'type_id'));
+        } else {
+          //Si c'est pas le cas il seras retourné sur la page d'activité
+          $today = date("Y-m-d");
+          $activitys=\App\Activity::where('validate','=','1')->orderBy('id', 'desc')->get();
+          $type_id = Auth::user()->type;
+          return view('indexActivity',compact('activitys', 'today', 'type_id'));
+        }
+
     }
     /**
      * Update the specified resource in storage.
@@ -65,6 +80,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
+      // Ici on va modifier l'idée ou l'activitée
         $activity= Activity::find($id);
         $activity->name=$request->get('name');
         $activity->description=$request->get('description');
@@ -83,9 +99,21 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
+      //On détermine si c'est un administrateur execute la commande
+      //Si c'est le cas il peut supprimer l'idée ou l'activité
+      //Dans le cas contraire il se verra renvoyer sur la page activité
+      $type_id = Auth::user()->type;
+      if($type_id == 1){
         $activity = Activity::find($id);
         $activity->delete();
         return redirect('activitys')->with('success','Information has been  deleted');
+      } else {
+        $today = date("Y-m-d");
+        $activitys=\App\Activity::where('validate','=','1')->orderBy('id', 'desc')->get();
+        $type_id = Auth::user()->type;
+        return view('indexActivity',compact('activitys', 'today', 'type_id'));
+      }
+
     }
 
 

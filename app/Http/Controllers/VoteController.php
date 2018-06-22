@@ -13,11 +13,15 @@ class VoteController extends Controller
 {
   public function edit($id)
   {
+    //redirection sur la page de vote
       $activity = Activity::find($id);
       return view('voteActivity',compact('activity', 'id'));
   }
   public function update(Request $request, $id)
   {
+    //C'est ici qu'on envoie les données lorsqu'un utilisateur vote
+    //On vérifie si l'utilisateur à déjà voté pour cet activité
+    //Si c'est le cas il est redirigé vers la liste des idées
     $activity_id= Activity::find($id);
     $id1 = Auth::user()->id;
     $test = Vote::where('activities_id', $id)->where('user_id', $id1)->get();
@@ -41,6 +45,7 @@ class VoteController extends Controller
 }
   public function destroy($id)
   {
+    //C'est ici qu'on suprime un vote lié à une activité
     $id1 = Auth::user()->id;
     Vote::where('activities_id', $id)->where('user_id', $id1)->delete();
     return redirect('idee')->with('success','Information has been  deleted');

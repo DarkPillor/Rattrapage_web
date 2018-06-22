@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Index Page</title>
+    <title>Liste des photos</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/elements.css') }}">
@@ -24,7 +24,9 @@
               <a href="{{ route('register') }}">Register</a>
           @endauth
         </div>
+      </div>
     @endif
+    
     <div class="container">
     <br />
     @if (\Session::has('success'))
@@ -32,23 +34,19 @@
         <p>{{ \Session::get('success') }}</p>
       </div><br />
      @endif
-    <table class="table table-striped">
-
-    <tbody>
-      @foreach ($photo as $photos)
-      <?php $test = $photos->photo;?>
-        <a href="{{action('CommentController@edit', $photos['id'])}}"class="btn btn-warning">
-        <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()" alt ="<?php echo "$test"; ?>"></a>
-
-     @endforeach
-
+     <br />
+     <H1> La liste des photos lié à cet activité !</h1>
+       <br />
+     @foreach ($photo as $photos)
+        <?php $test = $photos->photo;?>
+          <a href="{{action('CommentController@edit', $photos['id'])}}"class="btn btn-warning">
+          <img src="{{asset("storage/storage/$test")}}" id="popup" onclick="div_show()" alt ="<?php echo "$test"; ?>"></a>
+        @endforeach
 
 
-    </body>
 
-    </tbody>
-  </table>
-  </div>
-</div>
-  </body>
+      </div>
+        </body>
+
+
 </html>

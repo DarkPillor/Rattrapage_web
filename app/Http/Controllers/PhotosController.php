@@ -13,6 +13,7 @@ class PhotosController extends Controller
 
   public function update(Request $request, $id)
   {
+    //Upload des images
     $photo = new Photo;
     $request->validate([
             'photo' => 'required|file|max:1024',
@@ -30,6 +31,7 @@ class PhotosController extends Controller
   }
   public function show($id)
   {
+    //On affiche tout les images lié à une activitée
     $activity = Activity::find($id);
     $photo = Photo::where('activities_id', $id)->get();
     return view('listPhoto',compact('photo', 'activity' ));

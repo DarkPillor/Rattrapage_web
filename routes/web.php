@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 
@@ -42,6 +43,7 @@ Route::post('Register/{id}', 'RegisterController@update');
 Route::Delete('Register/{id}', 'RegisterController@destroy');
 Route::resource('Register', 'RegisterController');
 
+Route::get('generate-pdf','HomeController@generatePDF');
 
 Auth::routes();
 

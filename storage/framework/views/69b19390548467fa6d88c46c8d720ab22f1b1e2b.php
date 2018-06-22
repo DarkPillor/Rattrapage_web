@@ -2,15 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Index Page</title>
+    <title>Les activité</title>
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
-    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo e(asset('css/mon_css.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/Activity.css')); ?>">
+    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
 
   </head>
-  <body>
+  <header>
     <div class="flex-center position-ref full-height">
         <?php if(Route::has('login')): ?>
             <div class="top-right links">
@@ -19,80 +20,61 @@
                   <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
                   <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
                   <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
+                  <a href="<?php echo e(route('logout')); ?>"> Déconnexion</a>
+
               <?php else: ?>
                   <a href="<?php echo e(route('login')); ?>">Login</a>
                   <a href="<?php echo e(route('register')); ?>">Register</a>
               <?php endif; ?>
             </div>
         <?php endif; ?>
-    <div class="container">
+      </div>
+    </div>
+</header>
+<body>
+  <br />
+  <H1> La liste des activités</h1>
     <br />
-    <?php if(\Session::has('success')): ?>
-      <div class="alert alert-success">
-        <p><?php echo e(\Session::get('success')); ?></p>
-      </div><br />
-     <?php endif; ?>
-
-    <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nom de l'activité</th>
-        <th>Description de l'activité</th>
-        <th>Date :</th>
-        <th>Heure :</th>
-        <th>Prix :</th>
-        <!-- <th>L'heure</th>
-        <th>Est ce qu'il va se repeter ?</th> -->
-
-        <th colspan="2">Action</th>
-      </tr>
-    </thead>
-      <tbody>
+     <div class="containerActivity">
       <?php $__currentLoopData = $activitys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <tr>
-        <td><a href="<?php echo e(action('PhotosController@show', $activity['id'])); ?>"><?php echo e($activity['name']); ?></a></td>
-        <td><?php echo e($activity['description']); ?></td>
-        <td><?php echo e($activity['date']); ?></td>
-        <td><?php echo e($activity['time']); ?></td>
-        <td><?php echo e($activity['cost']); ?> €</td>
-        <!-- <td><?php echo e($activity['time']); ?></td> -->
-        <!-- <td><?php echo e($activity['repeat']); ?></td> -->
+            <div class="boxA">
+            <p class="NomA" ><a href="<?php echo e(action('PhotosController@show', $activity['id'])); ?>"><?php echo e($activity['name']); ?></p>
+            <p class="DesA" ><?php echo e($activity['description']); ?></p>
+            <p class="DateA" ><?php echo e($activity['date']); ?></p>
+            <p class="PrixA" ><?php echo e($activity['cost']); ?> €</p>
+            <p class="TimeA" ><?php echo e($activity['time']); ?></p>
 
-        <?php if($type_id == 1): ?>
-        <td><a href="<?php echo e(action('activityController@edit', $activity['id'])); ?>"class="btn btn-warning"> Edit</a></td>
-        <td>
-          <form action="<?php echo e(action('activityController@destroy', $activity['id'])); ?>"class="btn btn-warning" method="post">
-            <?php echo csrf_field(); ?>
-            <input name="_method" type="hidden" value="DELETE">
-            <button class="btn btn-danger" type="submit">Delete</button>
-          </form>
-        </td>
-        <td><a href="<?php echo e(action('RegisterController@show', $activity['id'])); ?>"class="btn btn-warning"> Regarder la liste des inscrits</a></td>
-        <?php endif; ?>
+      <?php if($type_id == 1): ?>
+        <a href="<?php echo e(action('activityController@edit', $activity['id'])); ?>"class="EditA"> Edit</a>
+        <form action="<?php echo e(action('activityController@destroy', $activity['id'])); ?>"class="" method="post">
+          <?php echo csrf_field(); ?>
+          <input name="_method" type="hidden" value="DELETE" class="DeleteA" >
+          <button class="DeleteA" type="submit">Delete</button>
+        </form>
+        <a href="<?php echo e(action('RegisterController@show', $activity['id'])); ?>"class="ListRegisterA"> Regarder la liste des inscrits</a>
+
+      <?php endif; ?>
+
           <?php if($activity['date'] < $today): ?>
-        <td><a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="btn btn-warning"> S'inscrire</a></td>
-
-          <td>
-            <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>"class="btn btn-warning" method="post">
-              <?php echo csrf_field(); ?>
-              <input name="_method" type="hidden" value="DELETE">
-              <button class="btn btn-danger" type="submit">Se désinscrire !</button>
+          <div class ="Upload">
+            <form action="<?php echo e(action('PhotosController@update', $activity['id'])); ?>"class="btn btn-warning" method="post" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
+                <input type="file" name="photo"  >
+                <button type="submit" class="">Submit</button>
             </form>
-          </td>
-          <?php endif; ?>
-        <?php if($activity['date'] > $today): ?>
-        <form action="<?php echo e(action('PhotosController@update', $activity['id'])); ?>"class="btn btn-warning" method="post" enctype="multipart/form-data">
-                        <?php echo csrf_field(); ?>
-                        <input type="file" name="photo" >
-                        <button type="submit" class="btn btn-success">Submit</button>
-                      </form>
-                      <?php endif; ?>
-                    </td>
-      </tr>
+          </div>
+        <?php else: ?>
+        <a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="Inscrire" > S'inscrire</a>
+        <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>" method="post">
+          <?php echo csrf_field(); ?>
+            <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
+            <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
+        </form>
+
+
+        <?php endif; ?>
+      </div>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </tbody>
-  </table>
-  </div>
-</div>
+    </div>
   </body>
 </html>

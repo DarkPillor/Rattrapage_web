@@ -10,6 +10,8 @@ class LikephotosController extends Controller
 {
   public function update($id)
   {
+    //On vérifie si l'utilisateur à déjà Like ou non avant d'envoyer les donnée
+    //Si c'est le cas le like seras annulé
     $id1 = Auth::user()->id;
     $test = LikePhoto::where('photo_id', $id)->where('user_id', $id1)->get();
     foreach($test as $marcheputain){
@@ -33,6 +35,7 @@ class LikephotosController extends Controller
   }
   public function show($id)
 {
+  //Quand on delike une image, le like se verra effaçé
   $id1 = Auth::user()->id;
   LikePhoto::where('photo_id', $id)->where('user_id', $id1)->delete();
   return redirect('activitys')->with('success','Information has been  deleted');

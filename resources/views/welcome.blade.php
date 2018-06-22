@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Présentation</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -73,12 +73,18 @@
                       <a href="{{ url('/activitys')}}">Voir les activités</a>
                       <a href="{{ url('/idee') }}">Voir les idées</a>
                       <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                      <a href="{{ route('logout') }}"> Déconnexion</a>
                   @else
                       <a href="{{ route('login') }}">Login</a>
-                      <a href="{{ route('register') }}">Register</a>
+                      <a href="{{ route('register') }}">S'enregistrer</a>
                   @endauth
                 </div>
             @endif
+            <div class="Exia">
+                <img src="{{ asset('Image/Exia.png') }}" alt="Exia">
+            </div>
+
+
 
 
         </div>

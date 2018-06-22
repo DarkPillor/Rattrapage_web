@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Laravel 5.6 CRUD Tutorial With Example  </title>
+    <title>Créer une activité </title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
@@ -20,23 +20,22 @@
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  <a href="{{ route('logout') }}"> Déconnexion</a>
               @else
                   <a href="{{ route('login') }}">Login</a>
                   <a href="{{ route('register') }}">Register</a>
               @endauth
             </div>
         @endif
+      </div>
+      <br />
+
+        <br />
+      @if($type_id ==1)
     <div class="container">
-      <h2>Création d'une activité</h2><br/>
+      <center><h2>Création d'une activité</h2><br/></center>
       <form method="post" action="{{url('activitys')}}" enctype="multipart/form-data">
         @csrf
-        <div class="row">
-          <div class="col-md-6"></div>
-          <div class="form-group col-md-4">
-            <label for="name">Combien l'activité va couter:</label>
-            <input type="number" step="0.01" min="0" max="9999" class="form-control" name="cost">
-          </div>
-        </div>
         <div class="row">
           <div class="col-md-6"></div>
           <div class="form-group col-md-4">
@@ -48,8 +47,16 @@
           <div class="col-md-6"></div>
             <div class="form-group col-md-4">
               <label for="description">Description:</label>
-              <textarea name="description" class="form-control" rows="5" cols="40"></textarea>
+              <textarea name="description" class="form-control" rows="5" cols="40" maxlength="255"></textarea>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="form-group col-md-4">
+            <label for="name">Combien l'activité va couter:</label>
+            <input type="number" step="0.01" min="0" max="9999" class="form-control" name="cost">
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6"></div>
             <div class="form-group col-md-4">
@@ -68,25 +75,14 @@
                </select>
            </div>
        </div>
-
-
-      
-
-      </div>
-        <div class="row">
+       <div class="row">
           <div class="col-md-6"></div>
           <div class="form-group col-md-4" style="margin-top:60px">
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">Envoyer</button>
           </div>
         </div>
       </form>
     </div>
-    <!-- <script type="text/javascript">
-        $('#datepicker').datepicker({
-            autoclose: true,
-            format: 'dd-mm-yyyy'
-         });
-    </script> -->
-  </div>
+    @endif
   </body>
 </html>

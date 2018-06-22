@@ -2,15 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Index Page</title>
+    <title>Liste des idées</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Activity.css')}}">
+    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
 
   </head>
-  <body>
+  <header>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
@@ -19,69 +20,47 @@
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  <a href="{{ route('logout') }}"> Déconnexion</a>
               @else
                   <a href="{{ route('login') }}">Login</a>
                   <a href="{{ route('register') }}">Register</a>
               @endauth
             </div>
         @endif
-    <div class="container">
 
-    <br />
-    @if (\Session::has('success'))
-      <div class="alert alert-success">
-        <p>{{ \Session::get('success') }}</p>
-      </div><br />
-     @endif
+</header>
+<body>
+  <br />
+  <H1> La liste des idées </H1>
 
-    <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nom de l'activité</th>
-        <th>Description de l'activité</th>
-        <th>Date :</th>
-        <th>Prix :</th>
-        <!-- <th>L'heure</th>
-        <th>Est ce qu'il va se repeter ?</th> -->
-        <th colspan="2">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-
+     <div class="containerActivity">
       @foreach($activitys as $activity)
-      <tr>
-        <td>{{$activity['name']}}</td>
-        <td>{{$activity['description']}}</td>
-        <td>{{$activity['date']}}</td>
-        <td>{{$activity['cost']}} €</td>
+            <div class="boxA">
+            <p class="NomA" >{{$activity['name']}}</p>
+            <p class="DesA" >{{$activity['description']}}</p>
+            <p class="DateA" >{{$activity['date']}}</p>
+            <p class="PrixA" >{{$activity['cost']}} €</p>
+            <p class="TimeA" >{{$activity['time']}}</p>
 
+      @if($type_id == 1)
+        <a href="{{action('activityController@edit', $activity['id'])}}"class="EditA"> Edit</a>
+        <form action="{{action('activityController@destroy', $activity['id'])}}"class="" method="post">
+          @csrf
+          <input name="_method" type="hidden" value="DELETE" class="DeleteA" >
+          <button class="DeleteA" type="submit">Delete</button>
+        </form>
+        <a href="{{action('RegisterController@show', $activity['id'])}}"class="ListRegisterA"> Regarder la liste des inscrits</a>
 
-        @if($type_id == 1)
-        <td><a href="{{action('activityController@edit', $activity['id'])}}"class="btn btn-warning"> Edit</a></td>
-        <td>
-          <form action="{{action('activityController@destroy', $activity['id'])}}"class="btn btn-warning" method="post">
-            @csrf
-            <input name="_method" type="hidden" value="DELETE">
-            <button class="btn btn-danger" type="submit">Delete</button>
-          </form>
-        </td>
-        @endif
+      @endif
+        <a href="{{action('VoteController@edit', $activity['id'])}}"class="VoteI">A voter !</a>
+        <form action="{{action('VoteController@destroy', $activity['id'])}}"class="" method="post" >
+          @csrf
+          <input name="_method" type="hidden" value="DELETE">
+          <button  type="submit" class="DevoteI" >Dévoter</button>
+        </form>
 
-        <td><a href="{{action('VoteController@edit', $activity['id'])}}"class="btn btn-warning">A voter !</a></td>
+        </div>
+      @endforeach
 
-        <td>
-            <form action="{{action('VoteController@destroy', $activity['id'])}}"class="btn btn-warning" method="post" >
-              @csrf
-              <input name="_method" type="hidden" value="DELETE">
-              <button class="btn btn-success" type="submit" >Dévoter</button>
-            </form>
-        </td>
-        
-      </tr>
-    @endforeach
-    </tbody>
-  </table>
-  </div>
-</div>
   </body>
 </html>

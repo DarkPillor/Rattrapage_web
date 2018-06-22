@@ -1,4 +1,15 @@
 <?php return array (
+  'barryvdh/laravel-dompdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\DomPDF\\Facade',
+    ),
+  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
@@ -18,6 +29,14 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'xethron/migrations-generator' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Way\\Generators\\GeneratorsServiceProvider',
+      1 => 'Xethron\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
     ),
   ),
 );

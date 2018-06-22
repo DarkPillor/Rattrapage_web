@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Index Page</title>
+    <title>Liste des personnes inscrites</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/mon_css.css')}}">
@@ -19,12 +19,14 @@
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  <a href="{{ route('logout') }}"> Déconnexion</a>
               @else
                   <a href="{{ route('login') }}">Login</a>
                   <a href="{{ route('register') }}">Register</a>
               @endauth
             </div>
         @endif
+      </div>
     <div class="container">
     <br />
     @if (\Session::has('success'))
@@ -32,6 +34,7 @@
         <p>{{ \Session::get('success') }}</p>
       </div><br />
      @endif
+    <a href="{{action('HomeController@generatePDF', $users['id'])}}"class="EditA"> Imprimer en PDF</a>
     <table class="table table-striped">
     <thead>
       <tr>
@@ -49,14 +52,10 @@
                     <td>$name</td>
                     <td>$firntamename</td>
                     <td>$payed </td>
-                  </tr>";
-
-       ?>
-
+                  </tr>";?>
       @endforeach
     </tbody>
   </table>
   </div>
-</div>
   </body>
 </html>
