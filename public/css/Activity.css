@@ -2,7 +2,9 @@
     position: absolute;
 }
 
-
+.Exia {
+  height: 500px;
+}
 .containerActivity {
     position: relative;
     width: 100%;
@@ -221,6 +223,26 @@
     position: absolute;
     width: 150px;
     height: 35px;
+    top: 10px;
+    left : 10px;
+    color: white;
+    background: red;
+    border:2px solid red;
+    border-radius: 2px;
+    text-decoration: none;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+.boxA a.CSVA {
+    position: absolute;
+    width: 150px;
+    height: 30px;
     top: 10px;
     left : 10px;
     color: white;

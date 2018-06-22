@@ -8,6 +8,7 @@ Use Auth;
 Use App\Register;
 use App\Activity;
 use App\User;
+Use Response;
 
 class RegisterController extends Controller
 {
@@ -61,12 +62,34 @@ class RegisterController extends Controller
               ->select('users.name','users.firstname', 'registers.payed')
               ->where('activities_id', '=', $id)
               ->get();
-    return view('listRegister',compact('users', $type_id));
+    return view('listRegister',compact('users', 'type_id'));
     }else {
       $today = date("Y-m-d");
       $activitys=\App\Activity::where('validate','=','1')->orderBy('id', 'desc')->get();
       $type_id = Auth::user()->type;
       return view('indexActivity',compact('activitys', 'today', 'type_id'));
     }
+  }
+  public function CSV($id)
+  {
+        $table = DB::table('registers')
+                  ->join('users', 'registers.user_id', '=', 'users.id')
+                  ->select('users.name','users.firstname', 'registers.payed')
+                  ->where('activities_id', '=', $id)
+                  ->get();
+        $filename = "participants.csv";
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('Prenom', 'Nom', 'A t il payé ?'));
+        foreach($table as $row) {
+                $name = $row->name;
+                $firstname = $row->firstname;
+                $payed = $row->payed;
+            fputcsv($handle, array($firstname, $name, $payed));
+        }
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return Response::download($filename, 'participants.csv', $headers);
   }
 }

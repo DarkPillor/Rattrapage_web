@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{asset('css/Activity.css')}}">
 
         <!-- Styles -->
         <style>
@@ -80,8 +81,8 @@
                   @endauth
                 </div>
             @endif
-            <div class="Exia">
-                <img src="{{ asset('Image/Exia.png') }}" alt="Exia">
+            <div >
+                <img src="{{ asset('Image/Exia.png') }}" alt="Exia" class="Exia">
             </div>
 
 

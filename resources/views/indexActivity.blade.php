@@ -45,6 +45,7 @@
             <p class="TimeA" >{{$activity['time']}}</p>
 
       @if($type_id == 1)
+        <a href="{{action('RegisterController@CSV', $activity['id'])}}"class="CSVA"> Génerer un csv</a>
         <a href="{{action('activityController@edit', $activity['id'])}}"class="EditA"> Edit</a>
         <form action="{{action('activityController@destroy', $activity['id'])}}"class="" method="post">
           @csrf
@@ -70,8 +71,6 @@
             <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
             <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
         </form>
-
-
         @endif
       </div>
       @endforeach

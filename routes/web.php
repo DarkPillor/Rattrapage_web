@@ -39,6 +39,7 @@ Route::resource('LikePhoto', 'LikephotosController');
 Route::post('LikePhoto/{id}', 'LikephotosController@update');
 Route::delete('LikePhoto/{id}', 'LikephotosController@destroy');
 
+Route::get('Register/{id}', 'RegisterController@CSV');
 Route::post('Register/{id}', 'RegisterController@update');
 Route::Delete('Register/{id}', 'RegisterController@destroy');
 Route::resource('Register', 'RegisterController');

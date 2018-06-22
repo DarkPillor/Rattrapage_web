@@ -45,6 +45,7 @@
             <p class="TimeA" ><?php echo e($activity['time']); ?></p>
 
       <?php if($type_id == 1): ?>
+        <a href="<?php echo e(action('RegisterController@CSV', $activity['id'])); ?>"class="CSVA"> Génerer un csv</a>
         <a href="<?php echo e(action('activityController@edit', $activity['id'])); ?>"class="EditA"> Edit</a>
         <form action="<?php echo e(action('activityController@destroy', $activity['id'])); ?>"class="" method="post">
           <?php echo csrf_field(); ?>
@@ -70,8 +71,6 @@
             <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
             <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
         </form>
-
-
         <?php endif; ?>
       </div>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

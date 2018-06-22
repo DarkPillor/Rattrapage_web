@@ -34,7 +34,7 @@
         <p>{{ \Session::get('success') }}</p>
       </div><br />
      @endif
-    <a href="{{action('HomeController@generatePDF', $users['id'])}}"class="EditA"> Imprimer en PDF</a>
+    
     <table class="table table-striped">
     <thead>
       <tr>
