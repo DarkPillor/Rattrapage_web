@@ -14,34 +14,40 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->middleware('auth');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('activitys','activityController')->middleware('auth');
-Route::resource('idee', 'ideeController')->middleware('auth');
+Route::resource('activitys','activityController');
+Route::resource('idee', 'ideeController');
 
-Route::resource('Photos','PhotosController')->middleware('auth');
-Route::post('Photos/{id}', 'PhotosController@update')->middleware('auth');
+Route::resource('Photos','PhotosController');
+Route::post('Photos/{id}', 'PhotosController@update');
 
 
-Route::post('Vote/{id}', 'VoteController@update')->middleware('auth');
-Route::delete('Vote/{id}','VoteController@destroy')->middleware('auth');
-Route::resource('Vote', 'VoteController')->middleware('auth');
+Route::post('Vote/{id}', 'VoteController@update');
+Route::delete('Vote/{id}','VoteController@destroy');
+Route::resource('Vote', 'VoteController');
 
-Route::post('Comment/{id}','CommentController@update')->middleware('auth');
+Route::post('Comment/{id}','CommentController@update');
 // Route::get('Comment/{Comment}/edit', 'CommentController@edit');
-Route::resource('Comment', 'CommentController')->middleware('auth');
+Route::resource('Comment', 'CommentController');
 
-Route::resource('LikePhoto', 'LikephotosController')->middleware('auth');
-Route::post('LikePhoto/{id}', 'LikephotosController@update')->middleware('auth');
-Route::delete('LikePhoto/{id}', 'LikephotosController@destroy')->middleware('auth');
+Route::resource('LikePhoto', 'LikephotosController');
+Route::post('LikePhoto/{id}', 'LikephotosController@update');
+Route::delete('LikePhoto/{id}', 'LikephotosController@destroy');
 
-Route::get('Register/{id}', 'RegisterController@CSV')->middleware('auth');
-Route::post('Register/{id}', 'RegisterController@update')->middleware('auth');
-Route::Delete('Register/{id}', 'RegisterController@destroy')->middleware('auth');
+Route::get('Register/{id}', 'RegisterController@CSV');
+Route::post('Register/{id}', 'RegisterController@show');
+Route::Delete('Register/{id}', 'RegisterController@destroy');
 Route::resource('Register', 'RegisterController');
 
-Route::get('generate-pdf','HomeController@generatePDF')->middleware('auth');
+Route::get('generate-pdf','HomeController@generatePDF');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();

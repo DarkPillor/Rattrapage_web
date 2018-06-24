@@ -9,7 +9,7 @@ class LikePhoto extends Model
 
     protected $table = 'likePhotos';
     public $timestamps = true;
-    protected $fillable = array('user_id', 'photo_id', 'isLike');
+    protected $fillable = array('user_id', 'photo_id', );
 
     public function user()
     {

@@ -19,7 +19,9 @@
                   <a href="{{ url('/home') }}">Home</a>
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
+                  @if(Auth::user()->type_id ==1)
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  @endif
                   <a href="{{ route('logout') }}"> Déconnexion</a>
 
               @else
@@ -57,6 +59,7 @@
       @endif
 
           @if ($activity['date'] < $today)
+          @if($type_id == 1)
           <div class ="Upload">
             <form action="{{action('PhotosController@update', $activity['id'])}}"class="btn btn-warning" method="post" enctype="multipart/form-data">
                 @csrf
@@ -64,6 +67,15 @@
                 <button type="submit" class="">Submit</button>
             </form>
           </div>
+          @else
+          <div class ="UploadA">
+            <form action="{{action('PhotosController@update', $activity['id'])}}"class="btn btn-warning" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="photo"  >
+                <button type="submit" class="">Submit</button>
+            </form>
+          </div>
+          @endif
         @else
         <a href="{{action('RegisterController@edit', $activity['id'])}}"class="Inscrire" > S'inscrire</a>
         <form action="{{action('RegisterController@destroy', $activity['id'])}}" method="post">

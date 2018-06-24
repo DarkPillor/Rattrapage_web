@@ -19,7 +19,9 @@
                   <a href="<?php echo e(url('/home')); ?>">Home</a>
                   <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
                   <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
+                  <?php if(Auth::user()->type_id ==1): ?>
                   <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
+                  <?php endif; ?>
                   <a href="<?php echo e(route('logout')); ?>"> Déconnexion</a>
 
               <?php else: ?>
@@ -57,6 +59,7 @@
       <?php endif; ?>
 
           <?php if($activity['date'] < $today): ?>
+          <?php if($type_id == 1): ?>
           <div class ="Upload">
             <form action="<?php echo e(action('PhotosController@update', $activity['id'])); ?>"class="btn btn-warning" method="post" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
@@ -64,6 +67,15 @@
                 <button type="submit" class="">Submit</button>
             </form>
           </div>
+          <?php else: ?>
+          <div class ="UploadA">
+            <form action="<?php echo e(action('PhotosController@update', $activity['id'])); ?>"class="btn btn-warning" method="post" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
+                <input type="file" name="photo"  >
+                <button type="submit" class="">Submit</button>
+            </form>
+          </div>
+          <?php endif; ?>
         <?php else: ?>
         <a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="Inscrire" > S'inscrire</a>
         <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>" method="post">

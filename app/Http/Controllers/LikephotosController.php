@@ -35,10 +35,21 @@ class LikephotosController extends Controller
   }
   public function show($id)
 {
-  //Quand on delike une image, le like se verra effaçé
   $id1 = Auth::user()->id;
+  $test = LikePhoto::where('photo_id', $id)->where('user_id', $id1)->get();
+  foreach($test as $marcheputain){
+      If($marcheputain['user_id'] == $id1){
+        $test = false;
+      } else{
+        $test = true;
+        };
+    };
+    if($test == false){
   LikePhoto::where('photo_id', $id)->where('user_id', $id1)->delete();
-  return redirect('activitys')->with('success','Information has been  deleted');
+  return redirect()->back();
+  }else{
+  return redirect('activitys');
+}
 }
 
 

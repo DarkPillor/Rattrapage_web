@@ -18,7 +18,9 @@
                   <a href="{{ url('/home') }}">Home</a>
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
+                  @if(Auth::user()->type_id ==1)
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  @endif
                   <a href="{{ route('logout') }}"> Déconnexion</a>
               @else
                   <a href="{{ route('login') }}">Login</a>
@@ -34,7 +36,7 @@
         <p>{{ \Session::get('success') }}</p>
       </div><br />
      @endif
-    
+
     <table class="table table-striped">
     <thead>
       <tr>

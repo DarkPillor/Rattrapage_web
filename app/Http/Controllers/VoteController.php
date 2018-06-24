@@ -38,7 +38,7 @@ class VoteController extends Controller
         $vote->activities_id = $id;
         $vote->time = $request->get('time');
         $vote->save();
-        return redirect()->back()->with('success','OUI');
+        return redirect('idee')->with('success','OUI');
       } else{
         return redirect('idee')->with('success','C FO CONNARD');
       }
@@ -47,8 +47,20 @@ class VoteController extends Controller
   {
     //C'est ici qu'on suprime un vote lié à une activité
     $id1 = Auth::user()->id;
+    $test = Vote::where('activities_id', $id)->where('user_id', $id1)->get();
+    foreach($test as $marcheputain){
+        If($marcheputain['user_id'] == $id1){
+          $test = false;
+        } else{
+          $test = true;
+          };
+      };
+      if($test == false){
     Vote::where('activities_id', $id)->where('user_id', $id1)->delete();
     return redirect('idee')->with('success','Information has been  deleted');
-  }
+  } else {
+    return redirect('idee');
+  };
 
+}
 }

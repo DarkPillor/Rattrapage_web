@@ -297,6 +297,22 @@
     border-radius: 2px;
     text-align: center;
 }
+.boxA div.UploadA {
+    position: absolute;
+    width: 400px;
+    height: 35inspx;
+    right: 100px;
+    top : 335px;
+    border-radius: 2px;
+    text-decoration: none;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 2px;
+    text-align: center;
+}
 
 .boxA a.VoteI {
     position: absolute;

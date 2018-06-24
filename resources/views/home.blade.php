@@ -16,7 +16,9 @@
                   <a href="{{ url('/home') }}">Home</a>
                   <a href="{{ url('/activitys')}}">Voir les activités</a>
                   <a href="{{ url('/idee') }}">Voir les idées</a>
+                  @if(Auth::user()->type_id ==1)
                   <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
+                  @endif
                   <a href="{{ route('logout') }}"> Déconnexion</a>
               @else
                   <a href="{{ route('login') }}">Login</a>
@@ -26,7 +28,7 @@
               </div>
         @endif
 <br />
-<H1> Voici les activités dont vous vous êtes inscrit</h1>
+<H1> La liste des événements où vous vous êtes inscrit :</h1>
   <br />
 
 <div class="container">

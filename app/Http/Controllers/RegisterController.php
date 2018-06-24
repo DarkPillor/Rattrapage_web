@@ -49,8 +49,20 @@ class RegisterController extends Controller
   {
     //on supprime l'inscription
     $id1 = Auth::user()->id;
-    Register::where('activities_id', $id)->where('user_id', $id1)->delete();
-    return redirect('activitys')->with('success','Information has been  deleted');
+    $test =  Register::where('activities_id', $id)->where('user_id', $id1)->get();
+    foreach($test as $marcheputain){
+        If($marcheputain['user_id'] == $id1){
+          $test = false;
+        } else{
+          $test = true;
+          };
+      };
+      if($test == false){
+          Register::where('activities_id', $id)->where('user_id', $id1)->delete();
+          return redirect('activitys')->with('success','Information has been  deleted');
+        }else {
+          return redirect('activitys');
+        }
   }
   public function show($id)
   {
