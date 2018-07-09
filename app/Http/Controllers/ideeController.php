@@ -17,4 +17,11 @@ class ideeController extends Controller
       $type_id = Auth::user()->type;
       return view('listIdee',compact('activitys', 'type_id' ));
   }
+  public function avert()
+  {
+    // Ici on liste la totalité des idées
+      $activitys=\App\Activity::where('validate','=','0')->orderBy('id', 'desc')->get();
+      $type_id = Auth::user()->type;
+      return view('listIdee',compact('activitys', 'type_id' ));
+  }
 }

@@ -30,10 +30,11 @@ class CommentController extends Controller
 
     $comments = DB::table('commentaires')
               ->join('users', 'commentaires.user_id', '=', 'users.id')
-              ->select('users.name','users.firstname', 'commentaires.description','commentaires.created_at' )
+              ->select('users.name','users.firstname', 'commentaires.description','commentaires.created_at', 'commentaires.id' )
               ->where('photo_id', '=', $id)
               ->orderBy('commentaires.id', 'desc')
               ->get();
       return view('CommentPhoto',compact('photos', 'id', 'counts', 'comments'));
   }
+
 }

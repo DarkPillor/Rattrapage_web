@@ -44,6 +44,7 @@ Route::post('Register/{id}', 'RegisterController@show');
 Route::Delete('Register/{id}', 'RegisterController@destroy');
 Route::resource('Register', 'RegisterController');
 
+Route::resource('pastactivity', 'pastActivityController');
 Route::get('generate-pdf','HomeController@generatePDF');
 
 Auth::routes();
@@ -51,3 +52,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
+
+//Route pour prévenir que certaines choses peuvent nuire à l'image de l'école
+Route::post('/idee/contact/{id}', 'AvertissmentController@idee');
+Route::post('/Photos/contact/{id}', 'AvertissmentController@image');
+Route::post('/Comment/contact/{id}', 'AvertissmentController@commentaire');
