@@ -18,6 +18,7 @@
           @auth
               <a href="{{ url('/home') }}">Home</a>
               <a href="{{ url('/activitys')}}">Voir les activités</a>
+              <a href="{{ url('/pastactivity')}}">Voir les activités passée</a>
               <a href="{{ url('/idee') }}">Voir les idées</a>
               <a href="{{ url('/activitys/create')}}"> Créer une idée</a>
               <a href="{{ route('logout') }}"> Déconnexion</a>
@@ -28,7 +29,8 @@
         </div>
         @endif
       </div>
-    </div>
+
+
 </header>
 <body>
   <br />
@@ -74,12 +76,30 @@
           </div>
           @endif
         @else
-        <a href="{{action('RegisterController@edit', $activity['id'])}}"class="Inscrire" > S'inscrire</a>
-        <form action="{{action('RegisterController@destroy', $activity['id'])}}" method="post">
-          @csrf
-            <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
-            <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
-        </form>
+        <?php
+        $userRegister = DB::table('registers')
+                    ->join('activities', 'activities.id', '=', 'registers.activities_id')
+                    ->select('registers.id')
+                    ->where('registers.user_id', '=', Auth::user()->id)
+                    ->where('registers.activities_id', '=', $activity['id'])
+                    ->first();
+                  if (empty ( $userRegister ))
+                      {
+                      ?>
+                      <a href="{{action('RegisterController@edit', $activity['id'])}}"class="Inscrire" > S'inscrire</a>
+                      <?php
+                      } else
+                      {
+                        ?>
+                        <form action="{{action('RegisterController@destroy', $activity['id'])}}" method="post">
+                          @csrf
+                            <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
+                            <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
+                        </form>
+                        <?php
+                      };
+                     ?>
+
         @endif
       </div>
       @endforeach

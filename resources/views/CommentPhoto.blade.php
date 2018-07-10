@@ -11,45 +11,62 @@
   <body>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
-            <div class="top-right links">
-              @auth
-                  <a href="{{ url('/home') }}">Home</a>
-                  <a href="{{ url('/activitys')}}">Voir les activités</a>
-                  <a href="{{ url('/idee') }}">Voir les idées</a>
-                  <a href="{{ url('/activitys/create')}}"> Créer une idée</a>
-                  <a href="{{ route('logout') }}"> Déconnexion</a>
-              @else
-                  <a href="{{ route('login') }}">Login</a>
-                  <a href="{{ route('register') }}">Register</a>
-              @endauth
-            </div>
-          </div>
+        <div class="top-right links">
+          @auth
+              <a href="{{ url('/home') }}">Home</a>
+              <a href="{{ url('/activitys')}}">Voir les activités</a>
+              <a href="{{ url('/pastactivity')}}">Voir les activités passée</a>
+              <a href="{{ url('/idee') }}">Voir les idées</a>
+              <a href="{{ url('/activitys/create')}}"> Créer une idée</a>
+              <a href="{{ route('logout') }}"> Déconnexion</a>
+          @else
+              <a href="{{ route('login') }}">Login</a>
+              <a href="{{ route('register') }}">Register</a>
+          @endauth
+        </div>
         @endif
-        <br />
+      </div>
+            <br />
         <H1> Commentez vos photos préférez et aimez les !</h1>
           <br />
           @foreach($photos as $photo)
           <?php $test = $photo->photo;
                 $test2 =$photo->id?>
           <center><img src="{{asset("storage/storage/$test")}}" id="popup" alt ="<?php echo "$test"; ?>" ></center>
-
+          @if($type_id == 2)
           <center><form action="{{url('Photos/contact', $test2)}}" method="POST">
             @csrf
                 <input type="submit" class="btn btn-danger" value="Cette image peut nuire à l'image de l'école"/>
             </form></center>
+            @endif
+            <center><H2>Il a été liké {{$counts}}</H2></center>
+            <?php
+            $userlike = DB::table('likephotos')
+                        ->join('photos', 'photos.id', '=', 'likephotos.photo_id')
+                        ->select('likephotos.id')
+                        ->where('likephotos.user_id', '=', Auth::user()->id)
+                        ->where('likephotos.photo_id', '=', $test2)
+                        ->first();
+                      if (empty ( $userlike ))
+                          {
+                          ?>
+                          <center><form action="{{action('LikephotosController@update', $id)}}"class="btn btn-warning" method="POST">
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Like</button>
+                          </form></center>
+                          <?php
+                          } else
+                          {
+                            ?>
+                            <center><form action="{{action('LikephotosController@destroy', $id)}}"class="btn btn-warning" method="DELETE">
+                              @csrf
+                              <input name="_method" type="hidden" value="DELETE">
+                              <button class="btn btn-danger" type="submit">Dislike</button>
+                            </form></center><br/ >
+                            <?php
+                          };
+                         ?>
           @endforeach
-          <center><H2>Il a été liké {{$counts}}</H2></center>
-
-          <center><form action="{{action('LikephotosController@update', $id)}}"class="btn btn-warning" method="POST">
-            @csrf
-            <button class="btn btn-danger" type="submit">Like</button>
-          </form>
-
-          <form action="{{action('LikephotosController@destroy', $id)}}"class="btn btn-warning" method="DELETE">
-            @csrf
-            <input name="_method" type="hidden" value="DELETE">
-            <button class="btn btn-danger" type="submit">Dislike</button>
-          </form></center><br/ >
 
           <form method="POST" action="{{action('CommentController@update', $id)}}">
             @csrf
@@ -87,11 +104,12 @@
                       <p class=\"DateC\">$created</p>
                     </div>
                   ";?>
-
+                @if($type_id == 2)
             <form action="{{url('Comment/contact', $id_comment)}}" method="POST">
                 @csrf
                   <input type="submit" class="btn btn-danger" value="Ce commentaire peut nuire à l'image de l'école"/>
             </form>
+            @endif
         @endforeach
     </div></center>
 

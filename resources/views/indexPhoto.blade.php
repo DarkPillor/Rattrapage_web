@@ -12,6 +12,7 @@
           @auth
               <a href="{{ url('/home') }}">Home</a>
               <a href="{{ url('/activitys')}}">Voir les activités</a>
+              <a href="{{ url('/pastactivity')}}">Voir les activités passée</a>
               <a href="{{ url('/idee') }}">Voir les idées</a>
               <a href="{{ url('/activitys/create')}}"> Créer une idée</a>
               <a href="{{ route('logout') }}"> Déconnexion</a>
@@ -20,6 +21,8 @@
               <a href="{{ route('register') }}">Register</a>
           @endauth
         </div>
+        @endif
+      </div>
 @endif
 <br />
 <H1> La liste des images lié à cet activité :</h1>

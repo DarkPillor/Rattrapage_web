@@ -18,6 +18,7 @@
           <?php if(auth()->guard()->check()): ?>
               <a href="<?php echo e(url('/home')); ?>">Home</a>
               <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+              <a href="<?php echo e(url('/pastactivity')); ?>">Voir les activités passée</a>
               <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
               <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une idée</a>
               <a href="<?php echo e(route('logout')); ?>"> Déconnexion</a>
@@ -28,7 +29,8 @@
         </div>
         <?php endif; ?>
       </div>
-    </div>
+
+
 </header>
 <body>
   <br />
@@ -74,12 +76,30 @@
           </div>
           <?php endif; ?>
         <?php else: ?>
-        <a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="Inscrire" > S'inscrire</a>
-        <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>" method="post">
-          <?php echo csrf_field(); ?>
-            <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
-            <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
-        </form>
+        <?php
+        $userRegister = DB::table('registers')
+                    ->join('activities', 'activities.id', '=', 'registers.activities_id')
+                    ->select('registers.id')
+                    ->where('registers.user_id', '=', Auth::user()->id)
+                    ->where('registers.activities_id', '=', $activity['id'])
+                    ->first();
+                  if (empty ( $userRegister ))
+                      {
+                      ?>
+                      <a href="<?php echo e(action('RegisterController@edit', $activity['id'])); ?>"class="Inscrire" > S'inscrire</a>
+                      <?php
+                      } else
+                      {
+                        ?>
+                        <form action="<?php echo e(action('RegisterController@destroy', $activity['id'])); ?>" method="post">
+                          <?php echo csrf_field(); ?>
+                            <input name="_method" type="hidden" value="DELETE" class="DesinscrireA">
+                            <button  type="submit" class="DesinscrireA">Se désinscrire !</button>
+                        </form>
+                        <?php
+                      };
+                     ?>
+
         <?php endif; ?>
       </div>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

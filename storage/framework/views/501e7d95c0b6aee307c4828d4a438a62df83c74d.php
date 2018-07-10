@@ -14,18 +14,19 @@
   <body>
     <div class="flex-center position-ref full-height">
         <?php if(Route::has('login')): ?>
-            <div class="top-right links">
-              <?php if(auth()->guard()->check()): ?>
-                  <a href="<?php echo e(url('/home')); ?>">Home</a>
-                  <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
-                  <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
-                  <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une activité</a>
-                  <a href="<?php echo e(route('logout')); ?>"> Déconnexion</a>
-              <?php else: ?>
-                  <a href="<?php echo e(route('login')); ?>">Login</a>
-                  <a href="<?php echo e(route('register')); ?>">Register</a>
-              <?php endif; ?>
-            </div>
+        <div class="top-right links">
+          <?php if(auth()->guard()->check()): ?>
+              <a href="<?php echo e(url('/home')); ?>">Home</a>
+              <a href="<?php echo e(url('/activitys')); ?>">Voir les activités</a>
+              <a href="<?php echo e(url('/pastactivity')); ?>">Voir les activités passée</a>
+              <a href="<?php echo e(url('/idee')); ?>">Voir les idées</a>
+              <a href="<?php echo e(url('/activitys/create')); ?>"> Créer une idée</a>
+              <a href="<?php echo e(route('logout')); ?>"> Déconnexion</a>
+          <?php else: ?>
+              <a href="<?php echo e(route('login')); ?>">Login</a>
+              <a href="<?php echo e(route('register')); ?>">Register</a>
+          <?php endif; ?>
+        </div>
         <?php endif; ?>
       </div>
       <br />

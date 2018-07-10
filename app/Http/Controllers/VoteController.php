@@ -40,7 +40,7 @@ class VoteController extends Controller
         $vote->save();
         return redirect('idee')->with('success','OUI');
       } else{
-        return redirect('idee')->with('success','C FO CONNARD');
+        return redirect('idee')->with('success','');
       }
 }
   public function destroy($id)

@@ -28,13 +28,15 @@ class CommentController extends Controller
     $counts = DB::table('likephotos')->where('photo_id','=',$id)->count();
     $photos = \App\Photo::where('id','=',$id)->get();
 
+    $type_id = Auth::user()->type;
+
     $comments = DB::table('commentaires')
               ->join('users', 'commentaires.user_id', '=', 'users.id')
               ->select('users.name','users.firstname', 'commentaires.description','commentaires.created_at', 'commentaires.id' )
               ->where('photo_id', '=', $id)
               ->orderBy('commentaires.id', 'desc')
               ->get();
-      return view('CommentPhoto',compact('photos', 'id', 'counts', 'comments'));
+      return view('CommentPhoto',compact('photos', 'id', 'counts', 'comments', 'type_id'));
   }
 
 }

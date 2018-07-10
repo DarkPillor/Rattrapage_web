@@ -28,6 +28,7 @@
           @endauth
         </div>
         @endif
+      </div>
 
 </header>
 <body>
@@ -53,22 +54,41 @@
         <a href="{{action('RegisterController@show', $activity['id'])}}"class="ListRegisterA"> Regarder la liste des inscrits</a>
 
       @endif
+      <?php
+      $uservote = DB::table('vote')
+                  ->join('activities', 'activities.id', '=', 'vote.activities_id')
+                  ->select('activities_id')
+                  ->where('vote.user_id', '=', Auth::user()->id)
+                  ->where('activities_id', '=', $activity['id'])
+                  ->first();
+                    if (empty ( $uservote ))
+                    {
+                    ?>
+                    <a href="{{action('VoteController@edit', $activity['id'])}}"class="Inscrire">A voter !</a>
+                    <?php
+                    } else
+                    {
+                      ?>
+                      <form action="{{action('VoteController@destroy', $activity['id'])}}"class="" method="post" >
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button  type="submit" class="DevoteI" >Dévoter</button>
+                      </form>
+                      <?php
+                    };
+                   ?>
 
-        <a href="{{action('VoteController@edit', $activity['id'])}}"class="VoteI">A voter !</a>
-        <form action="{{action('VoteController@destroy', $activity['id'])}}"class="" method="post" >
-          @csrf
-          <input name="_method" type="hidden" value="DELETE">
-          <button  type="submit" class="DevoteI" >Dévoter</button>
-        </form>
-        <div class="alertI">
-        <form action="{{url('idee/contact', $activity['id'])}}" method="POST">
-            @csrf
-              <input type="submit" class="btn btn-danger" value="Peut nuire à l'image de l'école"/>
-        </form>
-        </div>
-        </div>
+                   @if($type_id == 2)
+                   <div class="alertI">
+                     <form action="{{url('idee/contact', $activity['id'])}}" method="POST">
+                       @csrf
+                       <input type="submit" class="btn btn-danger" value="Peut nuire à l'image de l'école"/>
+                     </form>
+                     @endif
+                   </div>
+                 </div>
 
-      @endforeach
+                  @endforeach
 
   </body>
 </html>

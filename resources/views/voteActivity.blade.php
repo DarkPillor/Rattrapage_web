@@ -8,23 +8,23 @@
   </head>
   <body>
     <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
+        @if (Route::has('login'))
         <div class="top-right links">
           @auth
               <a href="{{ url('/home') }}">Home</a>
               <a href="{{ url('/activitys')}}">Voir les activités</a>
+              <a href="{{ url('/pastactivity')}}">Voir les activités passée</a>
               <a href="{{ url('/idee') }}">Voir les idées</a>
-              @if(Auth::user()->type_id ==1)
-              <a href="{{ url('/activitys/create')}}"> Créer une activité</a>
-              @endif
+              <a href="{{ url('/activitys/create')}}"> Créer une idée</a>
               <a href="{{ route('logout') }}"> Déconnexion</a>
           @else
               <a href="{{ route('login') }}">Login</a>
               <a href="{{ route('register') }}">Register</a>
           @endauth
         </div>
-    @endif
-  </div>
+        @endif
+      </div>
+  
     <div class="container">
       <center><h2>Voter pour une activité</h2><br  /></center>
         <form method="POST" action="{{action('VoteController@update', $id)}}">
